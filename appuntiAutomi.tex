@@ -1,5 +1,5 @@
 \documentclass[]{article}
-
+\usepackage{graphicx}
 %opening
 \title{Appunti di Automi e Linguaggi Formali}
 \author{Nicola Baesso}
@@ -58,5 +58,22 @@ Quindi la potenza di un alfabeto crea a sua volta un alfabeto, con stringhe di l
 \newline
 Un linguaggio L è un sottoinsieme dell'insieme di tutte le stringhe dell'alfabeto. In simboli: L $\subseteq$ $\Sigma$$^*$ per un certo $\Sigma$.
 \section{DFA, NFA, espressioni e Linguaggi (non) regolari}
+\subsection{DFA}
+Gli Automi a Stati Finiti (in Inglese Deterministic Finite Automation, abbreviato in DFA) sono la forma più semplice di automa e dispongono di una quantità finita di memoria.
+Tali automi accettano una parola nel linguaggio unicamente se è in uno stato terminale.
+\newline
+\newline
+\textbf{Esempio}
+Trovare ogni parola nel linguaggio binario che sia composta da un numero pari di 1.\newline
+Per creare questro DFA, abbiamo bisogno di due stati:\newline
+-Il primo sarà lo stato con il numero pari di 1. Tale stato sarà sia iniziale che terminale (e quindi accetterà la stringa).\newline
+-Il secondo sarà lo stato nel quale si ha un numero dispari di 1. In tale stato l'automa non accetterà la stringa.\newline
+Nel caso s'incontri uno 0, si deve rimanere nello stato attuale.\newline
+Segue immagine dell'automa, fatta su JFlap:
+\newline
+\includegraphics{DFA1.png}
+\newline
+\newline
+Si noti, nel esempio, che ogni stato esegue una transazione \textbf{per ogni simbolo nel linguaggio}. Inoltre, quello che fa l'automa è semplicemente "contare" quante cifre di 1 sono presenti, accettando la stringa solo quando questa cifra è pari.
 \section{Grammatiche di Linguaggi liberi da contesto e PDA}
 \end{document}
