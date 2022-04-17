@@ -57,6 +57,24 @@
 				\newline
 				\newline
 				Un linguaggio L è un sottoinsieme dell'insieme di tutte le stringhe dell'alfabeto. In simboli: L $\subseteq$ $\Sigma$$^*$ per un certo $\Sigma$.
+			\subsubsection{Operazioni sui linguaggi}
+				Definiamo le operazioni che si possono fare sui linguaggi: \newline \\
+				-Unione: L $\cup$ M=\{w : w $\in$ L oppure w $\in$ M\}\\
+				-Intersezione: L $\cap$ M=\{w : w $\in$ L e w $\in$ M\}\\
+				-Concatenazione: L.M=\{uv : u $\in$ L e v $\in $M\}\\
+				-Complemento: $\overline{L}$=\{w : w $\notin$ L\}\\
+				-Chiusura di Kleene (o Star): L$^*$=\{w1,w2,...wk : k $\ge$ 0 e ogni wi $\in$ L\}\\\\
+				Tutte questa operazioni godono (e ci fanno godere) della proprietà di chiusura. In altre parole, se L e M sono linguaggi regolari, allora anche L $\cup$ M, L $\cap$ M, L.M, $\overline{L}$ e L$^*$ sono linguaggi regolari.\\\\
+				\textbf{Importante!} Nelle prossime righe si parleranno di DFA, funzioni di transizioni e quant'altro. Se non si ha la più pallida idea di cosa significhino queste espressioni, v'invito a passare per la sezione DFA del seguente file, e successivamente ritornare sull'esempio che segue.
+				\\\\
+				\textbf{Esempio} Vogliamo (in realtà no, ma ci serve) dimostrare che la proprietà di chiusura vale per l'intersezione (dimostriamo la chiusura per intersezione).\\
+				Partiamo dal fatto (che vedremo in dettaglio più avanti) che, essendo L e M linguaggi regolari, esiste un DFA che accetta L e un DFA che accetta M. Quindi, essendo anche L $\cap$ M un linguaggio regolare, possiamo costruire un automa (più precisamente, un DFA) rappresentativo del linguaggio. In particolare, questo automa simula Al che Am in parallelo, e accetta una parola $\Leftrightarrow$ tale parola è accettata sia da Al che da Am.\\
+				La funzione di transizione dell'automa è formata da (p,q) $\rightarrow$ (s,t), con p $\rightarrow$ s funzione di transizione di Al, e q $\rightarrow$ t funzione di transizione di Am.\\
+				L'automa accetta una parola solo se Al e Am sono entrambi in uno stato finale. In altre parole, con p stato di Al e q stato di Am, l'automa accetta una parola solo se (p,q) è una coppia di stati finali. Formalmente:\\\\
+				AL$\cap$M=(Ql $\times$ Qm, $\Sigma$, $\delta$L$\cap$M, (ql,qm), Fl $\times$ Fm)\\
+				dove il simbolo $\times$ è il prodotto cartesiano.\\\\
+				L'esempio prende in considerazione il linguaggio L$\cap$M, ma il concetto della costruzione dell'automa è valido anche per dimostrare la proprietà di chiusura nelle altre operazioni.
+				
 	\section{DFA, NFA, espressioni e Linguaggi (non) regolari}
 		Dopo aver appreso le definizioni necessarie, andiamo a scoprire in questa sezione i primi automi (DFA ed NFA), cosa sono le espressioni regolari e cosa sono i Linguaggi non Regolari.
 		\subsection{DFA}
@@ -209,10 +227,25 @@
 						\{q3,q5\}* &$\emptyset$&$\emptyset$&\{q3,q5\} \\
 					\end{tabular}
 				\end{center}
-				Enunciamo ancheil teorema per la conversione da $\varepsilon$-NFA a DFA:
+				Enunciamo anche il teorema per la conversione da $\varepsilon$-NFA a DFA:
 				\newline
 				\newline
 				\textbf{Teorema}\newline
 				Un linguaggio L è accettato da un DFA $\Leftrightarrow$ L è accettato da un $\varepsilon$-NFA
+		\subsection{Espressioni Regolari}
+			Abbiamo visto come un linguaggio regolare possa essere espresso tramite un automa a stati finiti. Però non è l'unico modo per descriverlo. Infatti, possiamo esprimerlo anche tramite un'espressione regolare, che non è altro che un modo dichiarativo per descrivere un linguaggio regolare.\\
+			Gli ingredienti per costruire un'espressione regolare sono:\\
+			-un'insieme di costanti: $\varepsilon$ indica la stringa vuota, $\emptyset$ indica il linguaggio vuoto e si usano i simboli presenti in un alfabeto $\Sigma$\\
+			-operatori: + viene usato per l'unione, . viene usato per la concatenazione e * viene usato per la chiusura di Kleene (* include anche $\varepsilon$)\\
+			-parentesi, per il raggruppamento\\\\
+			Con L(E) si indica il linguaggio creato dall'espressione regolare. Essendo una dichiarazione del linguaggio, possono esserci più espressioni corrette per un linguaggio.\\\\
+			\textbf{Esempio} Supponiamo di voler definire come espressione regolare il segeunte linguaggio:\\\\
+			L=\{w $\in$ \{0,1\}* : 0 e 1 alternati in w\}\\\\
+			Possiamo descriverlo in due modi: o come unione delle possibilità, cioè unione di una alternanza 01, 10, 10101 o 01010, oppure come alternanza di 01, ma con la possibilità di avere un 1 davanti o uno 0.\\
+			Poniamolo come espressione, così che risulti più chiaro:\\\\
+			\begin{center}
+				(01)*+(10)*+1(01)*+0(10)*\\oppure\\ ($\varepsilon$+1)(01)*($\varepsilon$+0)
+			\end{center}
+			Si vede come, a livello pratico, non cambi nulla nel significato del linguaggio. Sta quindi a voi scegliere l'espressione che ritenete più opportuna.
 	\section{Grammatiche di Linguaggi liberi da contesto e PDA}
 \end{document}
