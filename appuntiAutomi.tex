@@ -246,6 +246,88 @@
 			\begin{center}
 				(01)*+(10)*+1(01)*+0(10)*\\oppure\\ ($\varepsilon$+1)(01)*($\varepsilon$+0)
 			\end{center}
-			Si vede come, a livello pratico, non cambi nulla nel significato del linguaggio. Sta quindi a voi scegliere l'espressione che ritenete più opportuna.
+			Si vede come, a livello pratico, non cambi nulla nel significato del linguaggio. Sta quindi a voi scegliere l'espressione che ritenete più opportuna.\\
+			\textbf{Importante!} Esattamente come nel linguaggio naturale, le espressioni regolari sono soggette alle precedenze. In particolare, in assenza di parentesi ogni operatore si lega al simbolo alla sua sinistra. Quindi, per fare un esempio, una espressione del tipo 01*+1 viene raggruppata come (0(1)*)+1, e quindi è differente da (01)*+1.
+		\subsection{Equivalenza tra FA e RE}
+			Abbiamo quindi visto finora gli automi a stati finiti (DFA, NFA, $\varepsilon$-NFA) e le espressioni regolari. Ma sappiamo anche che entrambi i modi rappresentano un linguaggio. Tramite questa conoscenza, possiamo passare da un automa (un DFA) ad una espressione regolare e viceversa (ma il quel caso si passerà ad un $\varepsilon$-NFA, come vediamo a breve).
+			\subsubsection{Da RE a $\varepsilon$-NFA}
+				Il primo modo è passare da una espressione regolare ad una $\varepsilon$-NFA. Usiamo il seguente teorema:\\\\
+				\textbf{Teorema} $\forall$ R espressione regolare possiamo costruire un $\varepsilon$-NFA A : L(A)=L(R)\\\\
+				Per far sì che il $\varepsilon$-NFA riconosca il linguaggio dell'espressione regolare, bisogna costruire un $\varepsilon$-NFA tale che abbia un solo stato finale, non abbia alcuna transizione entrante nello stato iniziale e non abbia nessuna transizione uscente dallo stato finale. Di seguito le regole per rappresentare unione, concatenazione e chiusura di Kleene.
+				\begin{center}
+					\includegraphics{ConversioneRENFA.png}
+				\end{center}
+				\textbf{Esempio} Consideriamo l'espressione regolare (0+1)*1(0+1).\\
+				Notiamo che la prima unione è anche una chiusura di Kleene, quindi nel'automa per R*, il nostro R sarà l'automa che rappresenta l'unione 0+1. Seguirà una $\varepsilon$-transizione ad un automa che conti il primo carattere, il quale avrà un'altra $\varepsilon$-transizione al secondo automa che rappresenta l'unione 0+1. Di seguito riportiamo il diagramma di transizione per l'$\varepsilon$-NFA appena descritto.
+				\begin{center}
+					\includegraphics[scale=0.35]{RENFA1.png}
+				\end{center}
+				Notare che, fondamentalmente, si concatenano più pezzi di automi semplici tramite $\varepsilon$-transizioni.
+			\subsubsection{Da DFA a RE}
+				Se invece si ha un automa e si vuole passare ad una espressione regolare, si utilizza una tecnica chiamata \textbf{eliminazione di stati}.\\
+				In pratica, quando uno stato viene eliminato, vengono eliminati anche i cammini per quello stato. Al suo posto, si mettono nuove transizioni con espressioni regolari, che descrivono anche le transizioni perse. Si continua finchè non si ha un'unica transizione, contenente il linguaggio riconosciuto dall'automa.\\
+				Riassumendo, l'automa di partenza deve avere un unico stato finale (e in caso di più stati finali, se ne crea uno nuovo con $\varepsilon$-transizioni provenienti dai vecchi stati finali), s'iniziano a collassare le transizioni tra la stessa coppia di stati e si eliminano tutti gli stati tranne quello iniziale e quello finale. Se qr $\not$= q0, ovvero stato finale e stato iniziale sono distinti, allora l'automa ha 4 transazioni: R(che rimane in q0),S(che da q0 va in qr),U(che rimane in qr) e T(che da qr ritorna in q0). L'espressione regolare che lo descrive è (R+SU*T)*SU*. Nel caso q0=qr, l'automa ha un unico stato R e la sua espressione regolare è R*.\\
+				\textbf{Esempio} Consideriamo il segeunte automa:\\
+				\begin{center}
+					\includegraphics[scale=0.7]{DFARE1.png}
+				\end{center}
+				Guardando l'automa, possiamo già intuire che saremo nel caso in cui avremo q0 $\not$= qr. La prima operazione è creare uno stato q4, che sarà il nostro stato finale, essendoci 2 stati finali. Collassando le transizioni, otteniamo transizioni di unione, quindi nel nostro caso, in q0 per esempio, invece che una transizione per 0 ed una transizione per 1 otterremo un'unica transizione 0+1. Passando alla eliminazione degli stati, quando elimino q1 creo una transizione che va da q0 a q2, che in espressione regolare si esprime con 1(0+1), quando elimino q2 passo ad una transizione da q0 a q3 che vale 1(0+1)(0+1), mentre la transizione da q0 a q4, essendo 1(0+1) una transizione diretta, è 1(0+1)+1(0+1)(0+1).\\
+				Quindi l'espressione regolare relativa all'automa visto è (0+1)*(1(0+1)+1(0+1)(0+1)).
+		\subsection{Linguaggi non regolari}
+			Finora abbiamo visto tutti i possibili modi per mostrare un linguaggio regolare, dall'automa all'espressione regolare. Ma prendiamo in esempio il seguente linguaggio:
+			\begin{center}
+				L01=\{0$^n$1$^n$ : n $\geq$ 0\}
+			\end{center}
+			Se un DFA con k stati legge 0$^k$, allora esiste un k+1 stato che è duplicato. Morale: se A legge 1$^i$ e finisce in uno stato finale, accetta la parola 0$^j$1$^i$, che non è nel linguaggio, mentre se finisce in uno stato non finale, rifiuta la parola 0$^i$1$^i$, che è nel linguaggio, ingannando in ogni caso l'automa. Tali linguaggi sono definiti non regolari.\\
+			Il problema è che dire "Non riesco a costruirci un automa a stati finiti" non dice nulla, c'è bisogno di una prova oggettiva, che introduciamo con il teorema del Pumping Lemma.\\\\
+			\textbf{Teorema} Supponiamo che L sia un linguaggio regolare. Allora $\exists$ una lunghezza k $\geq$ 0 tale che ogni parola w $\in$ L di lunghezza \textbar w\textbar $\geq$k può essere spezzata in w=xyz, tale che y $\not$= $\varepsilon$, \textbar xy\textbar $\leq$ k e $\forall$ i $\geq$ 0, xy$^i$z $\in$ L.\\\\
+			Quindi, per dimostrare che un linguaggio non è regolare, si usa il Pumping Lemma assumendo L regolare, portandosi in questo modo in una condizione di assurdità (non sempre funziona, ma nella maggior parte dei casi).
 	\section{Grammatiche di Linguaggi liberi da contesto e PDA}
+		Passiamo ora ad una nuova parte, dove vedremo i inguaggi Context-Free.\\
+		Questi linguaggi, a differenza dei linguaggi regolari e non, non  dipendono da un contesto, ma anche loro possono essere rappresentati in due modi, o come Grammatica Context-Free o come Automa a Pila, che vedremo successivamente.
+		\subsection{Grammatiche Context-Free}
+			Le Grammatiche Context-Free sono il primo modo per esprimere un linguaggio context-free. Esse utilizzano delle regole di sostituzione (generalmente hanno forme tipo A -\textgreater B), e queste regole possono avere variabili (tra cui una iniziale) o terminali (ovvero simboli dell'alfabeto che si utilizza).\\
+			\textbf{Esempio} Vediamo la grammatica G1. Essa utilizza come alfabeto $\Sigma$=\{0,1,$\#$\} ed è composta da 3 regole:\\
+			-A-\textgreater 0A1\\
+			-A-\textgreater B\\
+			-B-\textgreater $\#$\\
+			Un esempio di parola è 000$\#$111.\\\\
+			Come si vede nell'esempio, si parte dalla variabile iniziale (nell'esempio, A), e si segue la regola, finchè non rimangono solo i terminali. Generalmente queste regole sono espresse anche come alberi sintattici, come il seguente:
+			\begin{center}
+				\includegraphics{TREE.png}
+			\end{center}
+			Formalmente, una grammatica context-free è definita come (V,$\Sigma$,R,S), dove V è un insieme finito di variabili, $\Sigma$ è un insieme finito di terminali disgiunto da V, R è un insieme di regole, S è la variabile iniziale (S $\in$ V).\\\\
+			Ma come si progettano le grammatiche context-free? Fondamentalmente non esistono processi meccanici, però ci sono delle tecniche che possono tornare utili.\\
+			La prima riguarda l'unione di linguaggi più semplici, essendo molti linguaggi l'unione di linguaggi più semplici. L'idea è di costruire grammatiche separate per ogni componente, per poi unire le due grammatiche con una nuova regola iniziale.\\
+			La seconda, valida per i linguaggi regolari, consiste di prendere un DFA e trasformarlo in una grammatica context-free. L'idea sta nell'usare una variabile Ri per ogni stato qi, una regola ri -\textgreater aRj per ogni transizione e una regola Ri -\textgreater $\varepsilon$ per ogni stato finale qi. Se q0 è lo stato iniziale, la variabile iniziale è R0.\\
+			La terza consiste nel vedere un linguaggio come formato da due sottostringhe collegate. L'idea in questo caso è usare regole nella forma R-\textgreater uRv, che generano stringhe dove u corrisponde a v.
+			\subsubsection{Proprietà delle grammatiche context-free}
+				Diamo la definizione di albero sintattico: data una grammatica G=(V,$\Sigma$,R,S), un albero sintattico è un albero i cui nodi interni sono variabili di V, le foglie sono simboli terminali o $\varepsilon$ e se un nodo interno è etichettato con A e i suoi figli sono, da sinistra a destra, X1,X2...Xk, allora A -\textgreater X1X2...Xk è una regola di G.\\
+				Attenzione che un albero può generare una stringa in due modi diversi! Infatti, una grammatica genera ambiguamente una stringa se esistono due alberi sintattici diversi per quella stringa. Quindi, generalmente si effettua la derivazione a sinistra per evitare ambiguità.\\
+				Diamo una definizione: una grammatica è definita ambigua se genera almeno una stringa ambiguamente.\\
+				Inoltre esistono i linguaggi inerentemente ambigui, ovvero linguaggi che sono generati solo da grammatiche ambigue.\\
+				Ora, una grammatica context-free è migliore se semplificata, ed una delle forme più semplici è la forma normale di Chomsky, che rende ogni regola della forma A-\textgreater BC, A-\textgreater a, dove a è un terminale, B e C non posssono essere la variabile iniziale.\\ Inoltre, può esserci la regola S -\textgreater $\varepsilon$ per la variabile iniziale S. Per trasformare una grammatica context-free in forma normale di Chomsky, si aggiunge una nuova variabile, si eliminano le $\varepsilon$-regole, si eliminano le regole unitarie A-\textgreater B e si trasformano le regole rimaste nella forma corretta appena vista.\\
+				Segue un esempio, che non riporto a mano:\\
+				\begin{center}
+					\includegraphics{CHOMSKY1.png}
+					\includegraphics{CHOMSKY2.png}
+					\includegraphics{CHOMSKY3.png}
+					\includegraphics{CHOMSKY4.png}
+					\includegraphics{CHOMSKY5.png}
+				\end{center}
+		\subsection{PDA}
+			Gli automi a pila (dall'Inglese Pushdown Automation, abbreviato in PDA) sono degli automi che, oltre ad utilizzare gli stati, utilizzano anche una pila. La funzione di transizione stabilisce quali possono essere gli stati successivi e i simboli da scrivere nella pila, dati stato corrente, simbolo in input e il simbolo in cima alla pila. Inoltre, essendo la pila un tipo di memoria LIFO, permette all'automa di avere memoria infinita ad accesso limitato.\\
+			Formalmente, un PDA viene definito come P=(Q,$\Sigma$,$\Gamma$,$\delta$,q0,F), dove Q è un insieme finito di stati, $\Sigma$ è l'alfabeto di input, $\Gamma$ è l'alfabeto della pila, $\delta$ è la funzione di transizione, q0 è lo stato iniziale e F è l'insieme di stati accettanti.\\
+			\textbf{Esempio} Creiamo un PDA per il linguaggio L=\{0$^n$1$^n$ : n $\geq$ 0\}. Formalmente si definisce con P=(\{q0,q1,q2,q3\},\{0,1\},\{0,\$\},$\delta$,q0,\{q0,q3\}). Segue diagramma di transizione:
+			\begin{center}
+				\includegraphics{PDA1.png}
+			\end{center}
+			L'esempio appena visto accetta una parola per stato finale, ma un PDA può accettare anche per pila vuota. Infatti, un PDA accetta la parola w per pila vuota se $\exists$ una computazione che consuma tutto l'input e termina con la pila vuota. Inoltre, $\forall$ linguaggio accettato da un PDA per stato finale $\exists$ un PDA che accetta per pila vuota, e viceversa.
+		\subsection{Da Grammatiche Context-Free a PDA}
+			Enunciamo subito un teorema, che ci farà notare una somiglianza tra gli automi a stati finiti e i PDA:\\
+			\textbf{Teorema} Un linguaggio è context-free $\Leftrightarrow$ $\exists$ un PDA che lo riconosce\\
+			L'idea è che P simula i passi di derivazione in G, e P accetta w se esiste una derivazione di w in G.\\
+			La dimostrazione si fa creando un PDA P=(\{Qstart,Qloop,Qend\},$\Sigma$,$\Sigma$ $\cup$ V $\cup$ \{\$\},Qstart,{Qend}) e funzione di transizione $\varepsilon$,A-\textgreater u per la regola A-\textgreater u, a,a-\textgreater $\varepsilon$ per il terminale a (dove i vari stati sono presi dalla grammatica).
+		\subsection{Da PDA a Grammatiche Context-Free}
+		\subsection{Linguaggi non context-free}
 \end{document}
