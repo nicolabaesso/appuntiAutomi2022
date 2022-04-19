@@ -329,5 +329,29 @@
 			L'idea è che P simula i passi di derivazione in G, e P accetta w se esiste una derivazione di w in G.\\
 			La dimostrazione si fa creando un PDA P=(\{Qstart,Qloop,Qend\},$\Sigma$,$\Sigma$ $\cup$ V $\cup$ \{\$\},Qstart,{Qend}) e funzione di transizione $\varepsilon$,A-\textgreater u per la regola A-\textgreater u, a,a-\textgreater $\varepsilon$ per il terminale a (dove i vari stati sono presi dalla grammatica).
 		\subsection{Da PDA a Grammatiche Context-Free}
+			Per questo passaggio, andremo a fare una grammatica che fa un po' di più rispetto al PDA, ovvero generiamo una variabile Apq per ogni coppia di stati p,q di P, dove Apq genera ogni stringa che porta da p con pila vuota a q con pila vuota.\\
+			Occorre però che il PDA da trasformare rispetti 3 condizioni, ovvero ha un unico stato accettante qf, svuota la pila prima di accettare, e ogni transizione effettua il push o il pop, ma non entrambe le azioni. In particolare, quest'ultima azione prevede due casi, la prima riguarda l'inserimento all'inizio e la rimozione alla fine, la seconda vede un inserimento all'inizio ma una rimozione prima della fine (in r, quindi invece che solo Apq, si avrà sia Apr che Arq).\\
+			Formalmente, dato un PDA P=(Q,$\Sigma$,$\Gamma$,$\delta$,q0,\{qf\}), generiamo una grammatica G=(V,$\Sigma$,R,Aq0-qf) tale che\\
+			V=\{Apq : p,q $\in$ Q\},\\ 
+			$\forall$ p,q,r,s $\in$ Q, u $\in$ $\Gamma$ e a,b $\in$ $\Sigma$$\varepsilon$, se $\delta$(p,a,$\varepsilon$) contiene (r,u) e $\delta$(s,b,u) contiene (q,$\varepsilon$), aggiungiamo la regola Apq-\textgreater aArsb, \\
+			$\forall$ p,q,r $\in$ Q, aggiungiamo la regola Apq-\textgreater AprArq,\\
+			$\forall$ p $\in$ Q, aggiungiamo la regola App-\textgreater $\varepsilon$.
 		\subsection{Linguaggi non context-free}
+			Abbiamo visto, per i linguaggi regolari, che il Pumping Lemma è il modo per dimostrarne la regolarità. Similmente, esiste il Pumping Lemma per linguaggi context-free, di cui ora diamo l'enunciato.\\\\
+			\textbf{Teorema} Sia L un linguaggio context-free. Allora $\exists$ una lunghezza k $\geq$ 0 tale che $\forall$ w $\in$ L di lunghezza \textbar w\textbar $\geq$ k può essere spezzata in w=uvxyz tale che \textbar vy\textbar \textgreater 0, \textbar vxy\textbar $\leq$ k, $\forall$ i $\geq$ 0, uv$^i$xy$^i$z $\in$ L.\\\\
+			L'unica differenza, rispetto ai linguaggi regolari, è che in questo caso la parola viene divisa in 5 parti, e le parti "pompate" sono 2. Questo perché, per i linguaggi context-free, si replica il sottoalbero (ripetuto) di R rimanendo nel lingauggio (a parità di w "molto lunga" e albero sintattico relativo "molto alto"). Di seguito una dimostrazione grafica.
+			\begin{center}
+				\includegraphics{PLCFG1.png}
+				\includegraphics{PLCFG2.png}
+				\includegraphics{PLCFG3.png}
+			\end{center}
+			Includiamo inoltre proprietà degli alberi e dimostrazione, sempre in forma grafica.
+			\begin{center}
+				\includegraphics{PLCFG4.png}
+				\includegraphics{PLCFG5.png}
+				\includegraphics{PLCFG6.png}
+				\includegraphics{PLCFG7.png}
+				\includegraphics{PLCFG8.png}
+				\includegraphics{PLCFG9.png}
+			\end{center}
 \end{document}
