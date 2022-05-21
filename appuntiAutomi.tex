@@ -16,7 +16,7 @@
 	\textbf{Disclaimer}
 	\newline
 	\newline
-	Questi appunti sono una raccolta parziale delle spiegazioni del prof. Bresolin, e sono state scritte con la gioia di poterle portare al primo parziale dell'anno. Si consiglia comunque di utilizzare solo come eventuale ripasso e non come testo di studio.\\
+	Questi appunti sono una raccolta parziale delle spiegazioni del prof. Bresolin, e sono state scritte con la gioia di poterle portare ai parziali e all'esame. Si consiglia comunque di utilizzare solo come eventuale ripasso e non come testo di studio.\\
 	Il materiale utilizzato sono: slide del docente, soluzioni fornite dal docente e dal tutor.
 	\newpage
 	\section{Introduzione}
@@ -356,6 +356,17 @@
 				\includegraphics{PLCFG8.png}
 				\includegraphics{PLCFG9.png}
 			\end{center}
+	\section{Decidibilità e macchine di Turing}
+		Finora si sono visti sia automi a stati finiti (DFA, NFA, $\varepsilon$-NFA), sia automi a pila (PDA). Questi modelli hanno però una memoria limitata, o accessibile per un numero finito di volte. In questa sezione, vedremo un nuovo modello di automi, chiamati Macchine di Turing.
+		\subsection{Macchine di Turing}
+			Le Macchine di Turing (dall'inglese Turing Machines, abbreviato TM) altro non sono che un modello di calcolo proposto da (indovinate?) Alan Turing, nel 1936.\\\\ Tali macchine hanno una memoria illimitata e senza restrizioni, fondamentalmente rappresenta ogni calcolo che un computer reale può fare. Da ciò se ne deduce che se una TM non può risolvere un determinato problema, tale problema non può essere risolto da un computer poichè ne supera le capacità.\\\\
+			Si è detto che una TM ha memoria infinita e con accesso illimitato. Infatti, la memoria è rappresentata da un nastro infinito, con inizialmente l'input scritto su esso, dove una testina ci legge e ci scrive i simboli. Tale testina può muoversi in qualunque direzione, e legge stati speciali sia per l'accettazione che per il rifiuto di una parola, che hanno effetto immediato. Formalmente, si definisce in questo modo una TM:\\\\
+			M=(Q,$\Sigma$,$\Gamma$,$\delta$,q0,qAccept,qReject), dove Q è l'insieme finito di stati, $\Sigma$ è l'alfabeto di input e non contiene ␣ , $\Gamma$ è l'alfabeto del nastro, contiene sia il simbolo di blanck che i simboli presenti in $\Sigma$, $\delta$ è la funzione di transizione Q x $\Gamma$ $\mapsto$ Q x $\Gamma$ x \{L,R\}, q0 è lo stato iniziale, qAccept è lo stato accettante e qReject è lo stato di rifiuto, diverso da qAccept (ovviamente q0,qAccept,qReject $\in$ Q).
+			\subsubsection{Varianti}
+			\subsubsection{Algoritmi}
+		\subsection{Linguaggi decidibili}
+		\subsection{Indecidibilità e riducibilità}
+	\section{Teoria della complessità}
 	\section{Esercizi svolti}
 		\includepdf{Esempi di esame - Testi e soluzioni (1)/2106017_prima_parte_soluzione.pdf}
 		\includepdf[pages=-]{Tutorato/01TutoratoSol.pdf}
