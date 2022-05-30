@@ -361,7 +361,18 @@
 		\subsection{Macchine di Turing}
 			Le Macchine di Turing (dall'inglese Turing Machines, abbreviato TM) altro non sono che un modello di calcolo proposto da (indovinate?) Alan Turing, nel 1936.\\\\ Tali macchine hanno una memoria illimitata e senza restrizioni, fondamentalmente rappresenta ogni calcolo che un computer reale può fare. Da ciò se ne deduce che se una TM non può risolvere un determinato problema, tale problema non può essere risolto da un computer poichè ne supera le capacità.\\\\
 			Si è detto che una TM ha memoria infinita e con accesso illimitato. Infatti, la memoria è rappresentata da un nastro infinito, con inizialmente l'input scritto su esso, dove una testina ci legge e ci scrive i simboli. Tale testina può muoversi in qualunque direzione, e legge stati speciali sia per l'accettazione che per il rifiuto di una parola, che hanno effetto immediato. Formalmente, si definisce in questo modo una TM:\\\\
-			M=(Q,$\Sigma$,$\Gamma$,$\delta$,q0,qAccept,qReject), dove Q è l'insieme finito di stati, $\Sigma$ è l'alfabeto di input e non contiene ␣ , $\Gamma$ è l'alfabeto del nastro, contiene sia il simbolo di blanck che i simboli presenti in $\Sigma$, $\delta$ è la funzione di transizione Q x $\Gamma$ $\mapsto$ Q x $\Gamma$ x \{L,R\}, q0 è lo stato iniziale, qAccept è lo stato accettante e qReject è lo stato di rifiuto, diverso da qAccept (ovviamente q0,qAccept,qReject $\in$ Q).
+			M=(Q,$\Sigma$,$\Gamma$,$\delta$,q0,qAccept,qReject), dove Q è l'insieme finito di stati, $\Sigma$ è l'alfabeto di input e non contiene ␣ , $\Gamma$ è l'alfabeto del nastro, contiene sia il simbolo di blanck che i simboli presenti in $\Sigma$, $\delta$ è la funzione di transizione Q x $\Gamma$ $\mapsto$ Q x $\Gamma$ x \{L,R\}, q0 è lo stato iniziale, qAccept è lo stato accettante e qReject è lo stato di rifiuto, diverso da qAccept (ovviamente q0,qAccept,qReject $\in$ Q).\\\\
+			Inoltre, una TM viene descritta da una configurazione, ovvero una tripla uqv, dove q è lo stato corrente, u è il contenuto del nastro prima della testina e v è il contenuto del nastro dalla testina in poi. La testina è posizionata sul primo simbolo di v. Una configurazione C1 produce C2 se la TM in questione, in un passo, passa da C1 a C2.\\
+			\textbf{Esempio} Prendiamo in esame a,b,c $\in$ $\Gamma$ e u,v $\in$ $\Gamma^*$, con qi,qj stati. Allora:\\
+			Se $\delta$(qi,b)=(qj,c,L), la configurazione uaq$_i$bv produce uq$_j$acv,\\
+			se $\delta$(qi,b)=(qj,c,R), la configurazione uaq$_i$bv produce uacq$_j$v.ì\\\\
+			Per quanto riguarda le fasi iniziali e finali, q0w è la configurazione iniziale (con w l'input), una configurazione con stato qAccept è una configurazione di accettazione e una configurazione con stato qReject è una configurazione di rifiuto. Le configurazioni di accettazione e di rifiuto sono configurazioni di arresto.\\\\
+			Introduciamo ora i concetti di linguaggi Turing-riconoscibili e linguaggi Turing-decidibili. Un linguaggio è \textbf{Turing-riconoscibile} se $\exists$ una TM che lo riconosce, ovvero $\forall$ i,j=1,...,k C1 è la configurazione iniziale, ogni Ci produce Ci+1 e la configurazione di accettazione è Ck.\\ Un linguaggio è invece \textbf{Turing-decidibile} se $\exists$ una TM che lo decide, ovvero se dando un input M alla TM, essa termina sempre la computazione.\\\\
+			\textbf{Esempio} Introduciamo un esempio di TM. Supponiamo di avere il seguente linguaggio:
+			\begin{center}
+				A=\{$0^{2^n}$ : n $\geq$ 0\}
+			\end{center}
+			Tale linguaggio ha una TM che decide il linguaggio A. In particolare, scorre il nastro da sinistra a destra, cancellando ogni secondo 0. Se il nastro conteneva un solo 0, accetta. Se invece il nastro conteneva un numero dispari di 0, rifiuta. Tale operazioni sono ripetute nel caso non si verifichino i due casi precedenti.
 			\subsubsection{Varianti}
 			\subsubsection{Algoritmi}
 		\subsection{Linguaggi decidibili}
