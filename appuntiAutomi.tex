@@ -374,10 +374,90 @@
 			\end{center}
 			Tale linguaggio ha una TM che decide il linguaggio A. In particolare, scorre il nastro da sinistra a destra, cancellando ogni secondo 0. Se il nastro conteneva un solo 0, accetta. Se invece il nastro conteneva un numero dispari di 0, rifiuta. Tale operazioni sono ripetute nel caso non si verifichino i due casi precedenti.
 			\subsubsection{Varianti}
+				Oltre alla definizione che abbiamo appena osservato, esistono delle definizioni differenti di TM, che chiameremo varianti.\\
+				La prima è la \textbf{TM a nastro semi-infinito}, dove la testina è posizionata all'inizio del nastro e la testina è infinita solo verso destra. Ovviamente la testina può muoversi esattamente come in una TM classica, con l'unica eccezione che se richiede uno spostamento a sinistra a inizio nastro, la testina non si muove. Segue il teorema:\\\\
+				\textbf{Teorema}: $\forall$ TM a nastro semi-infinito $\exists$ una TM a nastro infinito equivalente (e viceversa).\\\\
+				Seguono ora le \textbf{TM multinastro}, dove una TM ha k nastri semi-infiniti. Logicamente, utilizza anche k testine per la lettura e la scrittura dei nastri. Il funzionamento differisce leggermente, poichè l'input per la TM si trova sul primo nastro, e ad ogni passo scrive e si muove simultaneamente su tutti i nastri. Prima di introdurre il teorema, dobbiamo parlare della sua funzione di transizione:\\\\
+				$\delta$: Q x $\Gamma^k$ $\rightarrow$ Q x $\Gamma^k$ x \{L,R\}$^2$\\\\
+				Se lo stato è qi e le testine leggono a1,...,ak allora scriviamo b1,...,bk sui k nastri, e poi muovendo ogni testina a sinistra o destra come specificato.\\\\
+				\textbf{Teorema}: $\forall$ TM multinastro $\exists$ una TM a singolo nastro equivalente.\\
+				L'idea è di creare una TM dove il nastro è formato dai k nastri, separati dal carattere \#, e indicando con un punto la posizione della testina.\\\\
+				Possiamo anche definire un \textbf{Corollario}: Un linguaggio è Turing-riconoscibile $\Leftrightarrow$ $\exists$ una TM multinastro che lo riconosce.\\
+				Tale corollario è valido poichè abbiamo definito una TM multinastro come una variante di una TM regolare.\\\\
+				Passiamo ora alle \textbf{TM non deterministiche}, dove sono possibili più strade durante la computazione. Per semplicità considereremo delle TM a nastro semi-infinito. Per queste TM, la computazione è un albero decisionale, e la TM accetta se $\exists$ un ramo che porta allo stato accettante. Anche in questo caso abbiamo bisogno di una nuova funzione di transizione:\\\\
+				$\delta$: Q x $\Gamma$ $\rightarrow$ 2$^{(Qx \Gamma x\{L,R\})}$\\\\
+				Quindi questa computazione richiede l'esaminazione di ogni ramo, fino a quello di accettazione (se esiste). Segue il teorema:\\\\
+				\textbf{Teorema}: $\forall$ TM non deterministica $\exists$ una TM deterministica equivalente.\\
+				In queste TM, il terzo nastro (in una TM a 3 nastri) tiene traccia delle scelte non deterministiche.\\\\
+				Anche con queste TM possiamo definire un \textbf{Corollario}: Un linguaggio è Turing-riconoscibile $\Leftrightarrow$ $\exists$ una TM non deterministica che lo riconosce. Anche in questo caso, una TM non determinista può essere trasformata in una TM deterministica, rendendo valido il corollario.\\\\
+				Vediamo ora gli \textbf{Enumeratori}, ovvero TM che usufruiscono anche di una stampante. Un linguaggio è detto enumerato se ne ha stampato tutte le stringhe, sono ammesse ripetizioni.\\
+				Ne segue subito il \textbf{Corollario}: Un linguaggio è Turing-riconoscibile $\Leftrightarrow$ $\exists$ un enumeratore che lo enumera.\\\\
+				Concludiamo con le \textbf{TM monodirezionali}, dove la macchina non può spostare la sua testina a sinistra, ma può tenerla ferma o spostarla a destra. Funzione di transizione: $\delta$: Q x $\Gamma$ $\rightarrow$ Q x $\Gamma$\{S,R\}.\\\\
+				Esistono poi altri modelli, che non affrontiamo. Quel che è rilevante sono gli elementi in comune, ovvero l'accesso senza restrinzioni ad una memoria illimitata, e l'equivalenza tra i vari modelli.
 			\subsubsection{Algoritmi}
+				Parliamo ora degli algoritmi per le TM. O meglio, di come possiamo descrivere la procedura con cui una TM riconosce, o decide, un determinato linguaggio.\\
+				Essenzialmente esistono 3 modi: la descrizione formale, la descrizione implementativa e la descrizione di alto livello.\\
+				Nella \textbf{descrizione formale} ogni singolo elemento è descritto in maniera dettagliata, e tutto è dichiarato esplicitamente. Questo metodo è sconsigliato poichè alle volte non è possibile descrive tutto dettagliatamente, ed è da evitare il più possibile.\\
+				Nella \textbf{descrizione implementativa} non vengono espressi dettagli sugli stati, e vengono espressi a parole il movimento della testina e la scrittura sul nastro. Questa descrizione è più tollerata rispetto alla precedente, ma non è la descrizione ottimale.\\
+				Nella \textbf{descrizione ad alto livello}, l'algoritmo viene descritto a parole e non viene fornito alcun dettaglio implementativo. Questa descrizione è quella da preferire sempre, tranne quando specificato di usarne una diversa.\\
+				Segue un esempio:
+				\begin{center}
+					\includegraphics[scale=0.8]{algoritmo1.png}
+					\includegraphics[scale=0.8]{algoritmo2.png}
+					\includegraphics[scale=0.8]{algoritmo3.png}
+					\includegraphics[scale=0.8]{algoritmo4.png}
+					\includegraphics[scale=0.8]{algoritmo5.png}
+				\end{center}
 		\subsection{Linguaggi decidibili}
+			In questa sezione, si tratteranno quali sono i linguaggi decidibili, ovvero se i linguaggi sono risolvibili o meno mediante un algoritmo.\\
+			Iniziamo vedendo i \textbf{problemi sui linguaggi regolari}. Una TM converta un DFA, un NFA o una RE in un'altra codifica. L'importante è mostrare che il linguaggio è decidibile mostrando che il problema computazione è decidibile. Di seguito alcuni esempi:
+			\begin{center}
+				\includegraphics[scale=0.8]{problemaRegolare1.png}
+				\includegraphics[scale=0.8]{problemaRegolare2.png}
+				\includegraphics[scale=0.8]{problemaRegolare3.png}
+				\includegraphics[scale=0.8]{problemaRegolare4.png}
+				\includegraphics[scale=0.8]{problemaRegolare5.png}
+				\includegraphics[scale=0.8]{problemaRegolare6.png}
+			\end{center}
+			Vediamo ora i \textbf{problemi sui linguaggi Context-free}, mostrando direttamente gli esempi:
+			\begin{center}
+				\includegraphics[scale=0.8]{problemaCF1.png}
+				\includegraphics[scale=0.8]{problemaCF2.png}
+				\includegraphics[scale=0.8]{problemaCF3.png}
+				\includegraphics[scale=0.8]{problemaCF4.png}
+			\end{center}
+			Concludiamo dando la relazione tra le classi di linguaggi:\\\\
+			Regolari $\subseteq$ Context-free $\subseteq$ Decidibili $\subseteq$ Turing-riconoscibili\\\\
+			Queste non sono solo classi di linguaggi, ma anche classi di capacità computazionale.
 		\subsection{Indecidibilità e riducibilità}
+			Ora passiamo alla indecidibilità e riducibilità di un algoritmo, ovvero come dimostrare se un algoritmo è indecidibile, ovvero non può essere risolto algoritmicamente, e un metodo per la dimostrazione, ovvero la riducibilità.
+			\subsubsection{Indecidibilità}
+				Essendo quasi tutto legato ad esempi, si riportano le immagini.
+				\begin{center}
+					\includegraphics[scale=0.8]{indecidibile1.png}
+					\includegraphics[scale=0.8]{indecidibile2.png}
+					\includegraphics[scale=0.8]{indecidibile3.png}
+					\includegraphics[scale=0.8]{indecidibile4.png}
+					\includegraphics[scale=0.8]{indecidibile5.png}
+					\includegraphics[scale=0.8]{indecidibile6.png}
+					\includegraphics[scale=0.8]{indecidibile7.png}
+				\end{center}
+			\subsubsection{Riducibilità}
+				La riduzione permette la trasformazione di un problema di un altro problema, di cui si può ricavare la soluzione, in modo da risolvere il problema originale.\\
+				In tal modo, prendendo A e B due problemi distinti, se A è riducibile a B e B è decidibile, allora anche A è decidibile. Mentre, se A è riducibile a B e A è indecidibile, allora pure B è indecidibile.\\
+				Tale riduzione può avvenire anche mediante una funzione. Seguono rappresentazione grafica e relativi esercizi/teoremi.
+				\begin{center}
+					\includegraphics[scale=0.8]{riducibile1.png}
+					\includegraphics[scale=0.8]{riducibile2.png}
+					\includegraphics[scale=0.8]{riducibile3.png}
+					\includegraphics[scale=0.8]{riducibile4.png}
+					\includegraphics[scale=0.8]{riducibile5.png}
+				\end{center}
 	\section{Teoria della complessità}
+		\subsection{Complessità di tempo}
+		\subsection{Tempo Polinomiale}
+		\subsection{La classe NP}
+		\subsection{Problemi NP completi}
 	\section{Esercizi svolti}
 		\includepdf{Esempi di esame - Testi e soluzioni (1)/2106017_prima_parte_soluzione.pdf}
 		\includepdf[pages=-]{Tutorato/01TutoratoSol.pdf}
