@@ -454,8 +454,23 @@
 					\includegraphics[scale=0.8]{riducibile5.png}
 				\end{center}
 	\section{Teoria della complessità}
+		In questa sezione vediamo come classificare la qualità di un algoritmo, e vedremo determinati insiemi di problemi.
 		\subsection{Complessità di tempo}
+			Quando si analizza un algoritmo, è fondamentale conoscere il suo tempo di esecuzione. Esso ci permette di dire se tale algoritmo è buono o meno, e per tale valutazione si cerca sempre di guardare il tempo al caso peggiore, quindi il tetto di massima in cui l'algoritmo gira.\\
+			In particolare, si utilizza la notazione O-grande:\\\\
+			\textbf{Definizione} Date f,g due funzioni, se $\exists$ due interi positivi c,n0 : $\forall$ n $\geq$ n0:\\ f(n) $\leq$ c g(n) allora f(n)=O(g(n)).\\ Si dice che g(n) è limite superiore asintotico per f(n).\\\\
+			Quindi, diamo sotto forma di teoremi/definizioni, delle valutazioni sulle varie TM viste sinora:\\\\
+			\textbf{Teorema}: Sia t(n) una funzione : t(n) $\leq$ n. Ogni TM multinastro di tempo t(n) ammette una TM equivalente a nastro singolo di tempo O(t$^2$(n)).\\\\
+			\textbf{Definizione}: Sia N una TM non deterministica che è anche un decisore. Il tempo di esecuzione di N è la funzione f : N $\rightarrow$ N tale che f(n) è il massimo numero di passi che N usa per ognuno dei rami di computazione, su input di lunghezza n.\\\\
+			\textbf{Teorema}: Sia t(n) una funzione : t(n) $\leq$ n. Ogni TM non deterministica di tempo t(n) ammette una TM equivalente a nastro singolo di tempo 2$^O$(t(n)).\\\\
+			Inoltre, la tesi di Church-Turing implica che tutti i modelli di calcolo "ragionevoli" sono equivalenti tra di loro.
 		\subsection{Tempo Polinomiale}
+			Ora possiamo parlare della classe P.\\
+			\textbf{Definizione} P è la classe di linguaggi che sono decidibili in tempo polinomiale da una TM a singolo nastro.\\
+			Per polinomiale s'intende un tempo O(n$^k$), con k$\geq$1. Questa classe corrisponde ai problemi che sono realisticamente risolvibili da un computer.\\
+			Inoltre, possiamo introdurre questo teorema:\\
+			\textbf{Teorema} Ogni linguaggio context-free è un elemento di P.\\
+			Ciò si dimostra partendo da un linguaggio CF, essendo decidibile, arrivando ad una soluzione con complessità O(n$^3$).
 		\subsection{La classe NP}
 		\subsection{Problemi NP completi}
 	\section{Esercizi svolti}
