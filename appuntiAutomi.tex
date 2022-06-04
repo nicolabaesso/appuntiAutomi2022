@@ -472,6 +472,14 @@
 			\textbf{Teorema} Ogni linguaggio context-free è un elemento di P.\\
 			Ciò si dimostra partendo da un linguaggio CF, essendo decidibile, arrivando ad una soluzione con complessità O(n$^3$).
 		\subsection{La classe NP}
+			Sappiamo che un problema è classificabile nella classe P se è decidibile in tempo polinomiale, rendendolo "facile". Ma se un problema è "difficile", ovvero risolverlo richiede un tempo più che polinomiale?\\
+			Perchè certi problemi richiedono tempi estremamente lunghi, come il gioco della Torre di Hanoi (circa O(2$^n$)), o non sono affatto risolvibili tramite un algoritmo, come l'Halting Problem di Turing. Tali linguaggi sono racchiusi nella classe NP.\\
+			La classe NP contiene linguaggi che non possono essere decisi in tempo polinomiale da una TM deterministica, ma tali linguaggi ammettono un verificatore che impiega tempo polinomiale. In pratica, in NP un algoritmo può verificare la correttezza di un risultato in un tempo accettabile, ma non può decidere un linguaggio (e se lo fa, non impiega un tempo polinomiale). Definiamo il "verificatore":\\
+			\textbf{Definizione} Un verificatore per un linguaggio A è un algoritmo V : A=\{w : V accetta (w,c) per qualche stringa c\}.\\
+			L'informazione necessaria al verificatore è il certificato c, con il quale stabilisce se w appartiene al linguaggio. Seguono due esempi di problemi nelle relative classi:
+			\begin{center}
+				\includegraphics[scale=0.8]{PNP.png}
+			\end{center}
 		\subsection{Problemi NP completi}
 	\section{Esercizi svolti}
 		\includepdf{Esempi di esame - Testi e soluzioni (1)/2106017_prima_parte_soluzione.pdf}
