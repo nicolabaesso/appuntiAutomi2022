@@ -17,7 +17,7 @@
 	\newline
 	\newline
 	Questi appunti sono una raccolta parziale delle spiegazioni del prof. Bresolin, e sono state scritte con la gioia di poterle portare ai parziali e all'esame. Si consiglia comunque di utilizzare solo come eventuale ripasso e non come testo di studio.\\
-	Il materiale utilizzato sono: slide del docente, soluzioni fornite dal docente e dal tutor.
+	Il materiale utilizzato sono: slide del docente, soluzioni fornite dal docente e soluzioni fornite dal tutor.
 	\newpage
 	\section{Introduzione}
 		\subsection{Definizioni utili alla comprensione}
@@ -481,11 +481,31 @@
 				\includegraphics[scale=0.8]{PNP.png}
 			\end{center}
 		\subsection{Problemi NP completi}
+			Tra la classe NP, che abbiamo appena visto, possiamo specificarne due tipi. Prima però è necessario introdurre il teorema di Cook e Levin:\\
+			\textbf{Teorema} L'esistenza di una TM polinomiale per risolvere CircuitSAT implica che P=NP.\\\\
+			CircuitSAT è un problema in NP, e può essere usato per risolvere tutti i problemi NP in tempo polinomiale.\\
+			Possiamo affermare ciò perchè CircuitSAT è NP-completo, ovvero è un problema che appartiene alla classe NP ed è NP-Hard. Un problema è detto NP-Hard se l'esistenza di un algoritmo che impiega tempo polinomiale implica l'esistenza di un algoritmo che risolve ogni problema in NP in tempo polinomiale.\\
+			Trattare problemi NP-Completi permette di risolverlo identificando un caso particolare e cercando una soluzione approssimata, poichè risulta molto complesso trovare un algoritmo efficiente per il caso generale che potrebbe non esistere.\\\\
+			Concludiamo con alcune immagini:
+			\begin{center}
+				\includegraphics[scale=0.8]{NP1.png}
+				\includegraphics[scale=0.8]{NP2.png}
+				\includegraphics[scale=0.8]{NP3.png}
+				\includegraphics[scale=0.8]{NP4.png}
+				\includegraphics[scale=0.8]{NP5.png}
+				\includegraphics[scale=0.8]{NP6.png}
+				\includegraphics[scale=0.8]{NP7.png}
+				\includegraphics[scale=0.8]{NP8.png}
+				\includegraphics[scale=0.8]{NP9.png}
+				\includegraphics[scale=0.8]{NP10.png}
+			\end{center}
 	\section{Esercizi svolti}
+	 	Di seguito sono elencati alcuni esercizi (risolti) tipicamente presenti all'esame.
 		\includepdf{Esempi di esame - Testi e soluzioni (1)/2106017_prima_parte_soluzione.pdf}
 		\includepdf[pages=-]{Tutorato/01TutoratoSol.pdf}
 		\includepdf[pages=-]{Tutorato/02SolTutorato.pdf}
 		\includepdf[pages=-]{Tutorato/03SolTutorato.pdf}
 		\includepdf[pages=-]{Tutorato/04SolTutorato.pdf}
 		\includepdf[pages=-]{Tutorato/05SolTutorato.pdf}
+		\includepdf[pages=-]{Esempi di esame - Testi e soluzioni (1)/210617_seconda_parte_soluzione.pdf}
 \end{document}
