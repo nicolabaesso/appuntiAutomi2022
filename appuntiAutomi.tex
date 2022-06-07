@@ -410,49 +410,24 @@
 				\end{center}
 		\subsection{Linguaggi decidibili}
 			In questa sezione, si tratteranno quali sono i linguaggi decidibili, ovvero se i linguaggi sono risolvibili o meno mediante un algoritmo.\\
-			Iniziamo vedendo i \textbf{problemi sui linguaggi regolari}. Una TM converta un DFA, un NFA o una RE in un'altra codifica. L'importante è mostrare che il linguaggio è decidibile mostrando che il problema computazione è decidibile. Di seguito alcuni esempi:
-			\begin{center}
-				\includegraphics[scale=0.8]{problemaRegolare1.png}
-				\includegraphics[scale=0.8]{problemaRegolare2.png}
-				\includegraphics[scale=0.8]{problemaRegolare3.png}
-				\includegraphics[scale=0.8]{problemaRegolare4.png}
-				\includegraphics[scale=0.8]{problemaRegolare5.png}
-				\includegraphics[scale=0.8]{problemaRegolare6.png}
-			\end{center}
+			Iniziamo vedendo i \textbf{problemi sui linguaggi regolari}. Una TM converte un DFA, un NFA o una RE in un'altra codifica. Mostrare che il linguaggio è decidibile equivale a dire che il problema computazione è decidibile. Di seguito alcuni esempi:
+			\includepdf[pages={4,7,9,11,13,14,16,17}, scale=0.75]{14-decidibili.pdf}
 			Vediamo ora i \textbf{problemi sui linguaggi Context-free}, mostrando direttamente gli esempi:
-			\begin{center}
-				\includegraphics[scale=0.8]{problemaCF1.png}
-				\includegraphics[scale=0.8]{problemaCF2.png}
-				\includegraphics[scale=0.8]{problemaCF3.png}
-				\includegraphics[scale=0.8]{problemaCF4.png}
-			\end{center}
+			\includepdf[pages={19,21,22,23,25}, scale=0.75]{14-decidibili.pdf}
 			Concludiamo dando la relazione tra le classi di linguaggi:\\\\
 			Regolari $\subseteq$ Context-free $\subseteq$ Decidibili $\subseteq$ Turing-riconoscibili\\\\
 			Queste non sono solo classi di linguaggi, ma anche classi di capacità computazionale.
+			\includepdf[pages={27,28,29}, scale=0.75]{14-decidibili.pdf}
 		\subsection{Indecidibilità e riducibilità}
 			Ora passiamo alla indecidibilità e riducibilità di un algoritmo, ovvero come dimostrare se un algoritmo è indecidibile, ovvero non può essere risolto algoritmicamente, e un metodo per la dimostrazione, ovvero la riducibilità.
 			\subsubsection{Indecidibilità}
 				Essendo quasi tutto legato ad esempi, si riportano le immagini.
-				\begin{center}
-					\includegraphics[scale=0.8]{indecidibile1.png}
-					\includegraphics[scale=0.8]{indecidibile2.png}
-					\includegraphics[scale=0.8]{indecidibile3.png}
-					\includegraphics[scale=0.8]{indecidibile4.png}
-					\includegraphics[scale=0.8]{indecidibile5.png}
-					\includegraphics[scale=0.8]{indecidibile6.png}
-					\includegraphics[scale=0.8]{indecidibile7.png}
-				\end{center}
+				\includepdf[pages={5,8-10,12,15-17,19-22}, scale=0.75]{15-indecidibili.pdf}
 			\subsubsection{Riducibilità}
 				La riduzione permette la trasformazione di un problema di un altro problema, di cui si può ricavare la soluzione, in modo da risolvere il problema originale.\\
 				In tal modo, prendendo A e B due problemi distinti, se A è riducibile a B e B è decidibile, allora anche A è decidibile. Mentre, se A è riducibile a B e A è indecidibile, allora pure B è indecidibile.\\
 				Tale riduzione può avvenire anche mediante una funzione. Seguono rappresentazione grafica e relativi esercizi/teoremi.
-				\begin{center}
-					\includegraphics[scale=0.8]{riducibile1.png}
-					\includegraphics[scale=0.8]{riducibile2.png}
-					\includegraphics[scale=0.8]{riducibile3.png}
-					\includegraphics[scale=0.8]{riducibile4.png}
-					\includegraphics[scale=0.8]{riducibile5.png}
-				\end{center}
+				\includepdf[pages={7,8,9,10,12,13,14,15,17,18,19,20}, scale=0.75]{16-riducibilita.pdf}
 	\section{Teoria della complessità}
 		In questa sezione vediamo come classificare la qualità di un algoritmo, e vedremo determinati insiemi di problemi.
 		\subsection{Complessità di tempo}
@@ -476,29 +451,15 @@
 			Perchè certi problemi richiedono tempi estremamente lunghi, come il gioco della Torre di Hanoi (circa O(2$^n$)), o non sono affatto risolvibili tramite un algoritmo, come l'Halting Problem di Turing. Tali linguaggi sono racchiusi nella classe NP.\\
 			La classe NP contiene linguaggi che non possono essere decisi in tempo polinomiale da una TM deterministica, ma tali linguaggi ammettono un verificatore che impiega tempo polinomiale. In pratica, in NP un algoritmo può verificare la correttezza di un risultato in un tempo accettabile, ma non può decidere un linguaggio (e se lo fa, non impiega un tempo polinomiale). Definiamo il "verificatore":\\
 			\textbf{Definizione} Un verificatore per un linguaggio A è un algoritmo V : A=\{w : V accetta (w,c) per qualche stringa c\}.\\
-			L'informazione necessaria al verificatore è il certificato c, con il quale stabilisce se w appartiene al linguaggio. Seguono due esempi di problemi nelle relative classi:
-			\begin{center}
-				\includegraphics[scale=0.8]{PNP.png}
-			\end{center}
+			L'informazione necessaria al verificatore è il certificato c, con il quale stabilisce se w appartiene al linguaggio.
 		\subsection{Problemi NP completi}
 			Tra la classe NP, che abbiamo appena visto, possiamo specificarne due tipi. Prima però è necessario introdurre il teorema di Cook e Levin:\\
 			\textbf{Teorema} L'esistenza di una TM polinomiale per risolvere CircuitSAT implica che P=NP.\\\\
 			CircuitSAT è un problema in NP, e può essere usato per risolvere tutti i problemi NP in tempo polinomiale.\\
 			Possiamo affermare ciò perchè CircuitSAT è NP-completo, ovvero è un problema che appartiene alla classe NP ed è NP-Hard. Un problema è detto NP-Hard se l'esistenza di un algoritmo che impiega tempo polinomiale implica l'esistenza di un algoritmo che risolve ogni problema in NP in tempo polinomiale.\\
 			Trattare problemi NP-Completi permette di risolverlo identificando un caso particolare e cercando una soluzione approssimata, poichè risulta molto complesso trovare un algoritmo efficiente per il caso generale che potrebbe non esistere.\\\\
-			Concludiamo con alcune immagini:
-			\begin{center}
-				\includegraphics[scale=0.8]{NP1.png}
-				\includegraphics[scale=0.8]{NP2.png}
-				\includegraphics[scale=0.8]{NP3.png}
-				\includegraphics[scale=0.8]{NP4.png}
-				\includegraphics[scale=0.8]{NP5.png}
-				\includegraphics[scale=0.8]{NP6.png}
-				\includegraphics[scale=0.8]{NP7.png}
-				\includegraphics[scale=0.8]{NP8.png}
-				\includegraphics[scale=0.8]{NP9.png}
-				\includegraphics[scale=0.8]{NP10.png}
-			\end{center}
+			Concludiamo con le slide:
+			\includepdf[pages={5-10,12-13,15,16,18-25,27,28,33,36-38,42,45,50-52,57-61,63,67-68,73,77,80-81,84-85,87,94,101-102}, scale=0.75]{20-npcompletezza.pdf}
 	\section{Esercizi svolti}
 	 	Di seguito sono elencati alcuni esercizi (risolti) tipicamente presenti all'esame.
 		\includepdf{Esempi di esame - Testi e soluzioni (1)/2106017_prima_parte_soluzione.pdf}
@@ -508,4 +469,7 @@
 		\includepdf[pages=-]{Tutorato/04SolTutorato.pdf}
 		\includepdf[pages=-]{Tutorato/05SolTutorato.pdf}
 		\includepdf[pages=-]{Esempi di esame - Testi e soluzioni (1)/210617_seconda_parte_soluzione.pdf}
+		\includepdf[pages=-]{Tutorato/06SolTutorato.pdf}
+		\includepdf[pages=-]{Esempi di esame - Testi e soluzioni (1)/210901_esame_alf_soluzioni.pdf}
+		\includepdf[pages=-]{Tutorato/08SolTutorato.pdf}
 \end{document}
